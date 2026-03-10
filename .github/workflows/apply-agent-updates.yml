@@ -1,0 +1,55 @@
+name: Apply Agent Updates
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main, master]
+
+jobs:
+  apply-updates:
+    if: >
+      github.event.pull_request.merged == true &&
+      (github.head_ref == 'agents' || startsWith(github.head_ref, 'agents/'))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Copy draft skills to prod
+        run: |
+          if [ -d ".claude/skills-draft" ]; then
+            echo "Copying skill drafts to prod..."
+            cp -r .claude/skills-draft/. .claude/skills/
+            echo "Done."
+          else
+            echo "No skills-draft directory found, skipping."
+          fi
+
+      - name: Copy draft CLAUDE.md if present
+        run: |
+          if [ -f ".claude/CLAUDE.draft.md" ]; then
+            echo "Copying CLAUDE.draft.md to CLAUDE.md..."
+            cp .claude/CLAUDE.draft.md CLAUDE.md
+            rm .claude/CLAUDE.draft.md
+            echo "Done."
+          else
+            echo "No CLAUDE.draft.md found, skipping."
+          fi
+
+      - name: Commit and push if anything changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .claude/skills/ CLAUDE.md 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Apply agent updates from PR #${{ github.event.pull_request.number }}: ${{ github.event.pull_request.title }}"
+            git push
+          fi
