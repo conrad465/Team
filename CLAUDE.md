@@ -1,3 +1,5 @@
+hello
+
 Hello! I am working on an experiment where I use agents to manage the e2e product development process for a utility I am building. 
 
 The idea: is inspired by khan academy videos that illustrates concepts, WhiteBoard AI is a framework that allows an LLM to create illustrative presentations without using expensive, slow video generation models. The framework consists of a JSON-oriented language and rendering engine. An LLM defines the presentation using the language and the engine can "animate it" using text-to-speech and SceneGraph. The key value of this utility is to speed up information transfer between LLMs (lightning fast thinkers) and people (not as fast). This approach combines cheap, fast text based generation capabilities of LLMs with human preference for animated visual information exchange.
@@ -13,3 +15,9 @@ Current state: I alone have worked with claude code to generate a PoC of an appl
 Note: A file named CLAUDE.draft.md may exist in this repository. It represents the previously promoted version of this file and is retained for diffing purposes only. Do not use it as guidance — this file (CLAUDE.md) is always the authoritative source.
 
 Branch rules: Never checkout or switch to the main or master branch. All agent work happens on the agents branch (or a branch prefixed with agents/). If you need changes on main, create a PR — do not switch to it directly.
+
+Skill and CLAUDE.md update rules: Never edit skill files (`.claude/skills/*/SKILL.md`) or `CLAUDE.md` directly as part of an improvement or self-update flow. All such changes must go through the draft → PR → GitHub Actions pipeline:
+1. Write the updated version to the draft location (`.claude/skills-draft/<skill>/SKILL.md` for skills, `.claude/CLAUDE.draft.md` for CLAUDE.md)
+2. Create a branch prefixed with `agents/` and open a PR to main
+3. GitHub Actions will copy the draft to the live location on merge
+4. The human must approve the PR before anything goes live
