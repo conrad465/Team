@@ -1,7 +1,8 @@
 ---
 name: pm
 description: >
-  Product management skill for the WhiteBoard AI project. Use this skill for ANY PM work on this project — writing or reviewing product specs, prioritizing features, analyzing user feedback, building or updating the roadmap, making strategic decisions, synthesizing user research, defining success metrics, or thinking through product-market fit. Also triggers for self-reflection, session retrospectives, or when the user wants to improve this skill. If the user is thinking about the product, what to build next, or how users are responding, use this skill.
+  Product management skill for the WhiteBoard AI project. Use this skill for ANY PM work on this project — writing or reviewing product specs, prioritizing features, analyzing user feedback, building or updating the roadmap, making strategic decisions, synthesizing user research, defining success metrics, or thinking through product-market fit.
+  Also triggers for self-reflection, session retrospectives, or when the user wants to improve this skill. If the user is thinking about the product, what to build next, or how users are responding, use this skill.
 ---
 
 # Product Manager — WhiteBoard AI
