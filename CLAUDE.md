@@ -1,23 +1,62 @@
-hello
+# Team Document — WhiteBoard AI
 
-Hello! I am working on an experiment where I use agents to manage the e2e product development process for a utility I am building. 
+This file is the authoritative guide for everyone on the team — human and agent alike. Read it before doing any work. It defines the project, the strategy, how the team operates, and where everything lives.
 
-The idea: is inspired by khan academy videos that illustrates concepts, WhiteBoard AI is a framework that allows an LLM to create illustrative presentations without using expensive, slow video generation models. The framework consists of a JSON-oriented language and rendering engine. An LLM defines the presentation using the language and the engine can "animate it" using text-to-speech and SceneGraph. The key value of this utility is to speed up information transfer between LLMs (lightning fast thinkers) and people (not as fast). This approach combines cheap, fast text based generation capabilities of LLMs with human preference for animated visual information exchange.
+---
 
-The strategy: for building this application is a simple flywheel that connects Three elements: the product vision, the system, and user feedback. A strong product vision yields a system (codebase) that delivers low latency, engaging, and visual LLM-to-human interface that attracts users and yields user feedback that enables a stronger product vision. 
+## The Project
 
-The approach overview: There will be four primary systems of record. The codebase, The product spec, and the Team document. The codebase and product spec will be owned by a product development agent, the strategy document will be co-owned by the agent and me, the human. finally user feedback is given by the user but the framework and collection system is part of the codebase/system. 
+WhiteBoard AI is a framework that lets LLMs generate illustrative presentations without expensive video generation. It consists of a JSON-oriented language and a rendering engine. An LLM defines a presentation using the language; the engine animates it using text-to-speech and SceneGraph.
 
-The Team document will be the method that everyone on the team uses to work together. It will define the overall strategy, share key information, state of the effort, tasks, the skills for each domain. Critical to the team document is a section where anyone can post suggestions / questions, including requests for new tools or skills for the rest of the team that could help us achieve our goals more effectively. 
+**The core insight**: LLMs think faster than people can read. WhiteBoard AI bridges that gap — combining cheap, fast text generation with human preference for animated, visual communication.
 
-Current state: I alone have worked with claude code to generate a PoC of an application that is currently hosted on GitHub Pages. For context, I am a student in business school. I am the sole user of this tool - it is not good enough yet for scaling to more people. There is a basic user feedback framework right now.
+**The flywheel**: Strong product vision → system that delivers low-latency, engaging visual experiences → attracts users → yields feedback → stronger product vision. Every decision should be traced back to whether it accelerates or slows this loop.
 
-Note: A file named CLAUDE.draft.md may exist in this repository. It represents the previously promoted version of this file and is retained for diffing purposes only. Do not use it as guidance — this file (CLAUDE.md) is always the authoritative source.
+**Current state**: PoC on GitHub Pages. Solo operation — one human (a business school student) and AI agents. Not yet ready to scale to more users. A basic user feedback framework exists.
 
-Branch rules: Never checkout or switch to the main or master branch. All agent work happens on the agents branch (or a branch prefixed with agents/). If you need changes on main, create a PR — do not switch to it directly.
+---
 
-Skill and CLAUDE.md update rules: Never edit skill files (`.claude/skills/*/SKILL.md`) or `CLAUDE.md` directly as part of an improvement or self-update flow. All such changes must go through the draft → PR → GitHub Actions pipeline:
+## Systems of Record
+
+There are three systems of record. Each has a clear owner. Project state, decisions, and history live here — not in skills.
+
+| System | Location | Owner |
+|---|---|---|
+| Codebase | `Codebase/` | Developer agent + human |
+| Product Spec | TBD (not yet created) | PM skill + human |
+| User Feedback | `User Feedback/` | System (collected automatically) |
+
+**Agents should read the relevant system of record before starting any task.** Don't rely on memory or skill files for current project state — go to the source.
+
+---
+
+## How Skills Work
+
+Skills encode **best practices for a type of task** — mental models, frameworks, and workflows that apply regardless of what the project looks like at any given moment.
+
+Skills do NOT encode project state. The current state of the codebase, open tasks, or recent decisions belong in the systems of record above, not in a skill file.
+
+| Skill | Domain |
+|---|---|
+| `pm` | Product management — specs, roadmap, prioritization, user feedback analysis |
+| `dev` | Development — architecture decisions, code review, implementation, refactoring |
+| `skill-creator` | Creating and improving skills |
+
+---
+
+## Branch Rules
+
+Never checkout or switch to `main` or `master`. All agent work happens on the `agents` branch. If you need changes on main, create a PR — do not switch to it directly.
+
+---
+
+## Skill and CLAUDE.md Update Rules
+
+Never edit skill files (`.claude/skills/*/SKILL.md`) or `CLAUDE.md` directly. All changes go through the draft → PR → GitHub Actions pipeline:
+
 1. Write the updated version to the draft location (`.claude/skills-draft/<skill>/SKILL.md` for skills, `.claude/CLAUDE.draft.md` for CLAUDE.md)
-2. Create a branch prefixed with `agents/` and open a PR to main
+2. Commit to the `agents` branch and open a PR to `main`
 3. GitHub Actions will copy the draft to the live location on merge
 4. The human must approve the PR before anything goes live
+
+Note: A file named `CLAUDE.draft.md` may exist in this repository. It represents the previously promoted version of this file and is retained for diffing purposes only. Do not use it as guidance — this file (`CLAUDE.md`) is always the authoritative source.
