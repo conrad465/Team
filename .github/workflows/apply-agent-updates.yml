@@ -36,7 +36,6 @@ jobs:
           if [ -f ".claude/CLAUDE.draft.md" ]; then
             echo "Copying CLAUDE.draft.md to CLAUDE.md..."
             cp .claude/CLAUDE.draft.md CLAUDE.md
-            rm .claude/CLAUDE.draft.md
             echo "Done."
           else
             echo "No CLAUDE.draft.md found, skipping."
