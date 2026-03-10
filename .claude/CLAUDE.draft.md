@@ -92,6 +92,21 @@ This is the current process for collecting and acting on user feedback. It will 
 
 **Step 5 — Iterate**: Regenerate affected test scenes, re-test, repeat.
 
+### Scene Regeneration Procedure
+
+**Trigger conditions** — regenerate when:
+- The system prompt is updated → regenerate all scenes
+- A new test case is added to `cases.json` → generate that scene only
+- PM flags it in a feedback analysis → regenerate specified scenes
+
+**Who runs it**: The human. The Anthropic API key lives locally; agents cannot run this autonomously. PM or Dev flags when regeneration is needed.
+
+**Steps:**
+1. PM or Dev flags regeneration needed (in feedback analysis or directly)
+2. Human runs `npm run test:generate` (all) or with a specific ID flag (single scene)
+3. Human reviews the generated scene in the app — does it play without errors? does it look reasonable?
+4. Human commits the updated scene files and pushes
+
 ---
 
 ## How to work together
