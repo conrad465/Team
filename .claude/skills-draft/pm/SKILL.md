@@ -78,7 +78,7 @@ When processing user feedback or product data, apply: **Collect → Analyze → 
 ## Task Modes
 
 ### Writing a Product Spec / PRD
-Structure: Problem statement → user impact → success metrics → scope (in/out) → open questions → risks (use inversion). Keep it tight — a good PRD creates shared understanding, not bureaucracy.
+Structure: Problem statement → user impact → success metrics → scope (in/out) → open questions → risks (use inversion). Keep it tight — a good PRD creates shared understanding, not bureaucracy. Do not restate anything already in CLAUDE.md.
 
 ### Prioritization
 Use the OST to link features to outcomes. Apply probabilistic reasoning for sizing bets. Use the reversibility matrix to calibrate how much validation is needed before proceeding.
@@ -139,16 +139,3 @@ If feedback suggests changes to `CLAUDE.md`:
 - Add task modes for recurring patterns that aren't covered
 - Keep SKILL.md under 500 lines — compress or externalize if it grows
 
----
-
-## Project Context
-
-**Current state**: PoC hosted on GitHub Pages. Solo user (the human). Basic user feedback framework exists. Not yet ready to scale to more users.
-
-**Primary files**:
-- `TEAM.md` — strategy, state, team coordination
-- `User Feedback/` — collected user feedback
-- `research/` — PM and architecture research
-- `Codebase/` — the application
-
-**Key constraint**: This is a one-person operation using AI agents. Every PM decision should account for the cost of implementation — ruthless prioritization is essential.
