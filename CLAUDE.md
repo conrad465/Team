@@ -18,15 +18,32 @@ WhiteBoard AI is a framework that lets LLMs generate illustrative presentations 
 
 ## Systems of Record
 
-There are three systems of record. Each has a clear owner. Project state, decisions, and history live here — not in skills.
+There are four systems of record. Each has a clear owner. Project state, decisions, and history live here — not in skills.
 
-| System | Location | Focus |
+| System | Location | Owner |
 |---|---|---|
-| Codebase | `Codebase/` | Developer skill |
-| Product Spec | TBD (not yet created) | PM skill + human |
+| Codebase | `Codebase/` | Dev skill |
+| System Prompt | `Codebase/public/system-prompt.md` | PM skill + Dev skill |
+| Product Spec | `Product Spec/` | PM skill + human |
 | User Feedback | `User Feedback/` | PM skill |
 
 **Agents should read the relevant system of record before starting any task.** Don't rely on memory or skill files for current project state — go to the source.
+
+The **system prompt** is the LLM contract — it defines what language constructs exist and how an LLM should use them to generate scenes. It is a joint PM/Dev artifact: PM owns the design intent; Dev owns technical accuracy relative to the rendering engine. Changes to either the engine or the product vision may require updating the system prompt.
+
+---
+
+## Agent Session Kickoff
+
+At the start of every session, read the following to get up to speed:
+
+| Agent | Read on startup |
+|---|---|
+| PM | All files in `Product Spec/`, all files in `User Feedback/`, recent git log |
+| Dev | `Codebase/README.md`, recent git log |
+| Both | `CLAUDE.md` (auto-loaded) |
+
+If `Product Spec/` is empty, the PM should flag it and create a spec before starting any feature work.
 
 ---
 
@@ -62,7 +79,7 @@ Never edit skill files (`.claude/skills/*/SKILL.md`) or `CLAUDE.md` directly. Al
 Note: A file named `CLAUDE.draft.md` may exist in this repository. It represents the previously promoted version of this file and is retained for diffing purposes only. Do not use it as guidance — this file (`CLAUDE.md`) is always the authoritative source.
 
 ## How to work together
-Working norms of this project are evolving. The human, PM and Dev skill should iteratively manage how to work together using this document. The AI should take a driving seat in determining the norms. 
+Working norms of this project are evolving. The human, PM and Dev skill should iteratively manage how to work together using this document. The AI should take a driving seat in determining the norms.
 
-## Human suggestions 
-If you need something to help you iterate on this project more effectively. Request it here. Tools, permissions, actions taken in the real world. Anything! But don't request unless 
+## Human suggestions
+If you need something to help you iterate on this project more effectively, request it here. Tools, permissions, actions taken in the real world. Anything! Only request when it's clearly necessary and would meaningfully unblock the team.
