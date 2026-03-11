@@ -466,9 +466,9 @@ The LLM's job is pure domain modeling + narration. These are all handled by the 
 
 ---
 
-## Open Questions
+## Resolved Design Decisions
 
-1. **Stock-to-stock flows**: The layout algorithm needs to handle pipes that go between two stocks (no clouds). Should these always route in a straight horizontal line, or should they arc above/below?
-2. **Feedback loop annotation**: When a connector creates a feedback loop (A→B→A cycle), should the engine automatically label it as "reinforcing" or "balancing"? Or is that the LLM's job via connector labels?
-3. **Multi-stock ordering**: If the LLM defines 3 stocks, should their left-to-right order on canvas follow the order in the `stocks` array? Or should the engine infer order from flow connections (upstream → downstream)?
-4. **Valve style**: Bowtie (⋈) is the standard Forrester notation. Is this recognizable enough for business school students, or should we use a simpler visual (like a tap/faucet icon)?
+1. **Stock-to-stock flows** arc above/below (not straight lines). Future: support configurable routing styles.
+2. **Feedback loop annotation**: The engine auto-detects feedback loops (cycles in the connector graph) and renders a small "R" (reinforcing) or "B" (balancing) annotation at the loop's visual center. Reinforcing = all connectors in the cycle have the same polarity or the LLM labels one "reinforcing". Balancing = LLM labels one "balancing" or the engine detects an odd number of negative links. The LLM can override via connector labels.
+3. **Multi-stock ordering**: The engine infers left-to-right order from flow connections (upstream → downstream). The `stocks` array order is a fallback only if connections don't imply a clear direction.
+4. **Valve style**: Bowtie (⋈) per standard Forrester notation. Assumed recognizable for the target audience.
